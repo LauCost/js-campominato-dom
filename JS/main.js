@@ -32,7 +32,12 @@ hard.addEventListener(`click`, function () {
 
 function generaGriglia(quadrati) {
 
+    const bombs = generaBombe(quadrati)
+
+    console.log(bombs);
+
     for (i = 1; i < quadrati; i++) {
+
 
         //Crea un elemento div
         const divEl = document.createElement("div");
@@ -48,13 +53,52 @@ function generaGriglia(quadrati) {
 
         //Funzione che server a colorare un quadrato quando ci si clicca sopra
         divEl.addEventListener(`click`, function () {
-            let cellNumber = this.innerHTML
+            let cellNumber = Number(this.innerHTML)
             console.log(cellNumber);
 
+            for (i = 0; i < bombs.length; i++) {
+                if (cellNumber == bombs[i]) {
+
+                    //Se è tra quelle autorizzate impostiamo l'accesso a true
+                    this.style.backgroundColor = "red"
+                } else {
+                    this.style.backgroundColor = "cyan"
+                }
+            }
+
+
             //Aggiunge il colore celeste all'elemento cliccato
-            this.style.backgroundColor = "cyan"
+
         })
     }
 
 }
 
+
+
+
+
+function generaBombe(quadrati) {
+
+    const bombs = [];
+
+    while (bombs.length < 16) {
+
+        const numeroRandom = getRandomNumer(1, quadrati);
+
+        if (!bombs.includes(numeroRandom)) {
+
+            bombs.push(numeroRandom);
+        }
+    }
+    return bombs
+}
+
+
+
+
+function getRandomNumer(min, max) {
+
+    return Math.round(Math.random() * (max - min)) + min;
+
+}
