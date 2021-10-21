@@ -54,16 +54,20 @@ function generaGriglia(quadrati) {
         //Funzione che server a colorare un quadrato quando ci si clicca sopra
         divEl.addEventListener(`click`, function () {
             let cellNumber = Number(this.innerHTML)
-            console.log(cellNumber);
+            /* console.log(cellNumber); */
 
             for (i = 0; i < bombs.length; i++) {
-                if (cellNumber == bombs[i]) {
+
+                if (cellNumber != bombs[i]) {
 
                     //Se è tra quelle autorizzate impostiamo l'accesso a true
-                    this.style.backgroundColor = "red"
+                    this.classList.add("cyan");
+
                 } else {
-                    this.style.backgroundColor = "cyan"
+
+                    this.classList.add("red");
                 }
+
             }
 
 
